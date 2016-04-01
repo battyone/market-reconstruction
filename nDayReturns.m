@@ -1,5 +1,10 @@
 function [ Time , Prices , err ] = nDayReturns( t , Prc , ndays )
 
+    if nargin == 2
+        % Default number of n-day period
+        ndays = 1;
+    end
+
     if length(Prc) > ndays
         
         % Get the number of points available
