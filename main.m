@@ -1,8 +1,8 @@
 % Active Data
-active_file = 'Data/NYSE.csv';
+data_file = 'Data/IBM.csv';
 
 % Open the file
-[T, P, err] = getPricesFromFile(active_file);
+[T, P, err] = getPricesFromFile(data_file);
 
 % Get the nth polynomial fit for the data
 n = 5;
