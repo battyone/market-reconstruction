@@ -21,7 +21,7 @@ nday = 1;
 
 % Get the historical volatility
 ndays = 10;
-[ vol_time , vol_hist , vol_err ] = hist_vol( nday_time , nday_return ,  ndays );
+[ vol_time , vol_hist , vol_err ] = histVol( nday_time , nday_return ,  ndays );
 
 % Plot the historical price
 if err == 0

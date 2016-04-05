@@ -1,4 +1,4 @@
-function [ Time, Volatility, err ] = hist_vol( t, returns, ndays )
+function [ Time, Volatility, err ] = histVol( t, returns, ndays )
 %Returns the historical volatility for n-day return periods
 
     if nargin == 2
