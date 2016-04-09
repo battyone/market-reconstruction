@@ -2,7 +2,7 @@
 showPlots = true;
 
 % Data File
-data_file = 'Data/NYSE.csv';
+data_file = 'Data/IBM.csv';
 
 % Open the file
 [T, P, err] = getPricesFromFile(data_file);
@@ -27,7 +27,7 @@ if err == 0 && showPlots
     if moments_err == 0
         figure;
         hold on
-        for j=1:Q
+        for j=2:Q
             plot(n_S(:,j),S(:,j));
         end
         hold off
