@@ -1,0 +1,27 @@
+% Settings
+showPlots = true;
+
+% Data File
+data_file = 'Data/NYSE.csv';
+
+% Open the file
+[T, P, err] = getPricesFromFile(data_file);
+
+% Get deltas
+N = 10^4;
+[d, n, delta_err] = delta(T, P, N);
+
+% Plot the data
+if err == 0 && showPlots
+    % Plot the n-day returns
+    if nday_err == 0
+        figure;
+        plot(x,y);
+        xlabel('');
+        ylabel('');
+        title('');
+    end
+elseif err == 1
+    % In case of error
+    disp('There was a problem opening the file');
+end

@@ -1,3 +1,6 @@
+% Settings
+showPlots = true;
+
 % Data File
 data_file = 'Data/NYSE.csv';
 
@@ -24,7 +27,7 @@ ndays = 10;
 [ vol_time , vol_hist , vol_err ] = histVol( nday_time , nday_return ,  ndays );
 
 % Plot the historical price
-if err == 0
+if err == 0 && showPlots
     % Plot the prices
     figure;
     plot(T,P,T,poly);
@@ -71,7 +74,7 @@ if err == 0
         ylabel(strcat(num2str(ndays),'-day volatility'));
         title('Historical Volatility');
     end
-else
+elseif err == 1
     % In case of error
     disp('There was a problem opening the file');
 end

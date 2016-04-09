@@ -20,14 +20,14 @@ function [ Time, Volatility, err ] = histVol( t, returns, ndays )
 
             for i = 1:k-1
                 
-                sum = 0;
+                sum_all = 0;
                 flag = i * ndays;
                 
                 for j = 1:ndays
-                    sum = sum + returns(flag+j-1);
+                    sum_all = sum_all + returns(flag+j-1);
                 end
                 
-                avg_r = sum ./ ndays;
+                avg_r = sum_all ./ ndays;
                 dev = 0;
                 
                 for j = 1:ndays

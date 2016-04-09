@@ -1,4 +1,4 @@
-function [ Time , Prices , err ] = nDayReturns( t , Prc , ndays )
+function [ Time , Returns , err ] = nDayReturns( t , Prc , ndays )
 
     if nargin == 2
         % Default number of n-day period
@@ -12,12 +12,12 @@ function [ Time , Prices , err ] = nDayReturns( t , Prc , ndays )
         
         % Find the number of output points
         k = N - ndays;
-        Prices = zeros(k-1,1);
+        Returns = zeros(k-1,1);
         Time = zeros(k-1,1);
         
         for i = 1:k-1
-            Prices(i) = log(Prc(i+ndays)) - log(Prc(i));
-            Time(i) = t(i);
+            Returns(i) = log(Prc(i+ndays)) - log(Prc(i));
+            Time(i) = t(i+ndays);
         end
         
         % No error
@@ -26,7 +26,7 @@ function [ Time , Prices , err ] = nDayReturns( t , Prc , ndays )
     else
 
         % Error found
-        Prices = [];
+        Returns = [];
         Time = [];
         err = 1;
 
