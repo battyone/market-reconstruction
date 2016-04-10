@@ -26,6 +26,10 @@ nday = 1;
 ndays = 10;
 [ vol_time , vol_hist , vol_err ] = histVol( nday_time , nday_return ,  ndays );
 
+% Get the correlations
+T_offset = 50;
+[corr, n_corr, corr_err] = correlate(T, P, T_offset);
+
 % Plot the historical price
 if err == 0 && showPlots
     % Plot the prices
@@ -63,6 +67,13 @@ if err == 0 && showPlots
         xlabel('Time');
         ylabel(strcat(num2str(nday),'-day returns'));
         title('Historical Returns');
+        
+        % Phase space
+        figure;
+        plot(nday_return(1:end-1),nday_return(2:end));
+        xlabel('r(t)');
+        ylabel('r(t+1)');
+        title('Phase space');
     end
     
     % Plot the historical volatility
@@ -73,6 +84,15 @@ if err == 0 && showPlots
         xlabel('Time');
         ylabel(strcat(num2str(ndays),'-day volatility'));
         title('Historical Volatility');
+    end
+    
+    % Plot the correlations
+    if corr_err == 0
+        figure;
+        plot(n_corr(:,1),corr(:,1),'x',n_corr(:,2),corr(:,2),'o');
+        xlabel('T');
+        ylabel('C[r(t),T]');
+        title('Returns correlations');
     end
 elseif err == 1
     % In case of error
