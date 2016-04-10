@@ -11,3 +11,10 @@ Data reconstruction process using a Markov process
 - n-day returns
 
 - Historical volatility (n-day periods)
+
+## Part II
+- delta(n)
+
+- S_q(n)
+
+- chi(q)
