@@ -24,7 +24,7 @@ nday = 1;
 
 % Get the historical volatility
 ndays = 10;
-[ vol_time , vol_hist , vol_err ] = histVol( nday_time , nday_return ,  ndays );
+[ vol_time , vol_hist , vol_acc, vol_err ] = histVol( nday_time , nday_return ,  ndays );
 
 % Get the correlations
 T_offset = 50;
@@ -39,7 +39,7 @@ if err == 0 && showPlots
     xlabel('Time');
     ylabel('Price (USD)');
     title('Historical Prices');
-    legend('Real prices','Polynomial fit (n=5)','Location','southeast');
+    legend('Real prices','Polynomial fit (n=7)','Location','southeast');
     
     % Plot the detrending
     figure;
@@ -76,7 +76,7 @@ if err == 0 && showPlots
         title('Phase space');
     end
     
-    % Plot the historical volatility
+    % Plot the historical volatility & accumulated
     if vol_err == 0
         figure;
         plot(vol_time,vol_hist);
@@ -84,6 +84,14 @@ if err == 0 && showPlots
         xlabel('Time');
         ylabel(strcat(num2str(ndays),'-day volatility'));
         title('Historical Volatility');
+        
+        % Accumulated volatility
+        figure;
+        plot(flip(vol_time),vol_acc);
+        datetick('x','keepticks','keeplimits');
+        xlabel('Time');
+        ylabel('Accumulated volatility');
+        title('Accumulated historical volatility');
     end
     
     % Plot the correlations
