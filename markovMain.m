@@ -15,3 +15,11 @@ data_file = 'Data/NYSE.csv';
 
 % Get the code
 [ code, c_err ] = codify( returns , alphabet );
+
+% Get the Markov matrix
+[ probMtx, N, m_err ] = markovMatrix(code);
+
+% Generate the sequence
+seq = procRcnst(probMtx, N);
+
+% Find the error
