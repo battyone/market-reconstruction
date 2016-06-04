@@ -1,4 +1,6 @@
 function [ Time , Returns , err ] = nDayReturns( t , Prc , ndays )
+% This functioncalculates de n-day daily returns for the prices input
+% such as r(t,n) = Log p(t+n) - Log p(t)
 
     if nargin == 2
         % Default number of n-day period

@@ -1,5 +1,7 @@
 function [ delta, n, err ] = delta( T, P, N )
-    
+% This function finds the deltas (maximum of r(t,n) over t)
+% such as delta(n) = max_t { r(t,n) }
+
     if N > length(P)
         delta = [];
         n = [];

@@ -1,5 +1,5 @@
 function [Time, Prices, Error] = getPricesFromFile(file_path)
-% Extracts the information from data retrived from Yahoo! Finance
+% Extracts the information from data files retrieved from Yahoo! Finance
 
 % Verify path validity
     if exist(file_path,'file')
@@ -20,7 +20,7 @@ function [Time, Prices, Error] = getPricesFromFile(file_path)
         
     else
         
-        % File error
+        % File reading error
         Time = [];
         Prices = [];
         Error = 1;

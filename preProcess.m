@@ -1,4 +1,7 @@
 function [ Time , Prices , err ] = preProcess( t , Prc , n )
+% This function pre-processes the princes input
+% by detrending using a n-polynomial fit and then rescaling
+% such as x(t) = p(t) x < p(t) > / q(t)
 
     if nargin == 2
         % Default polynomial degree

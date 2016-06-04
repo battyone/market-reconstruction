@@ -1,5 +1,5 @@
 function [ Time, Volatility, Acc, err ] = histVol( t, returns, ndays )
-%Returns the historical volatility for n-day return periods
+% Returns the historical volatility for n-day return periods
 
     if nargin == 2
         % Default number of n-day period

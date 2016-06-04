@@ -1,4 +1,6 @@
 function [ corr, n, err ] = correlate( T, P, T_offset, ndays )
+% This function finds the n-day returns correlation for a T-day window
+% such as C( r(n), T ) = < r(t+T,n) r(t,n) >
     
     if nargin == 3
         % Default number of n-day period

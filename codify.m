@@ -1,7 +1,8 @@
 function [ output, err ] = codify( returns, alphabet )
-%codify is the main function for the markov process
-%   it is responsible for the creation of the returns' coding
+% codify() is the main function for the markov process and
+% it's responsible for the creation of the returns' coding
     
+    % Assume there was an error if the next checks don't validate
     output = [];
     err = 1;
      

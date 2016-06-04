@@ -1,5 +1,7 @@
 function [ chi, q, err ] = chiOfS( S, n )
-    
+% This function calculates the scaling exponent chi(q)
+% assuming we can linearize it as Log Sq(n) = n x Log chi(q)
+
     if size(S) == size(n)
         
         log_S = log(S);

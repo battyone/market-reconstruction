@@ -1,5 +1,7 @@
 function [ S, n, err ] = moments_q( T, P, N, Q )
-    
+% This function calculates the moments of q-order of |r(t,n)|
+% such as S_q(n) = < |r(t,n)|^q >
+
     if nargin == 3
         % Default max of q moments
         Q = 8;
