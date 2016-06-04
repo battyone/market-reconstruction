@@ -1,28 +1,20 @@
-function [ markov, N, err ] = markovMatrix( codedData )
+function [ markov, err ] = markovMatrix( codedData )
     
     err = 0;
     
     % Get the number of data points
-    n = length(codedData);
+    N = length(codedData);
     
     % Get the number of unique elements (the alphabet length)
     index = unique(codedData);
     alpha = length(index);
     
-    % Get the absolute frequency of each element
-    % freq = [index, histc(codedData(:), index)];
+    % Pre-allocate the variables into memory
+    markov = zeros(alpha, alpha); % To store the Markov matrix
+    seqCount = zeros(alpha, alpha); % To count the frequencies
+    seqPrev = zeros(alpha, 1); % To divide the frequencies
     
-    % Calculate the respective probabilities
-    % prob = freq;
-    % prob(:,2) = prob(:,2) ./ n;
-    
-    % Calculate the 2-sequence probabilities
-    % and the (alpha x alpha) Markov matrix
-    markov = zeros(alpha, alpha);
-    seqCount = zeros(alpha, alpha);
-    seqPrev = zeros(alpha, 1);
-    N = floor(n/2);
-    
+    % Algorithm for the Markov matrix
     for i=2:N
         prev = codedData(i-1);
         this = codedData(i);
