@@ -2,7 +2,7 @@
 showPlots = true;
 
 % Data File
-data_file = 'Data/IBM.csv';
+data_file = 'Data/NYSE.csv';
 
 % Open the file and pre-process
 [T, P, err] = getPricesFromFile(data_file);
@@ -30,7 +30,8 @@ if err == 0 && showPlots
         figure;
         hold on
         for j=1:Q
-            plot(n_S(:,j),S(:,j));
+            % Do it in a logarithmic scale
+            plot(log(n_S(:,j)),log(S(:,j)));
         end
         hold off
         xlabel('n');
