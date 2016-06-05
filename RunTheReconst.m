@@ -27,3 +27,34 @@ secondHalf = code(N+1:end);
 
 % Generate the sequence through a reconstruction process
 [ forecast, f_err ] = procRcnst(probMtx, secondHalf);
+
+% Calculate the error
+% Get the error count
+procError = countError(secondHalf, forecast);
+% Get the count of right guesses
+idxRight = find( procError(:,1) == 0 );
+rightCount = procError(idxRight, 2);
+totalCount = sum( procError(:,2) );
+% The error using the reconstruction process is
+markovError = 1 - (rightCount ./ totalCount);
+
+% Compare the result with total random values
+K = length(secondHalf);
+alpha = max( unique(secondHalf) );
+% Generate a totally random forecast
+randForecast = getRandomVector(alpha, K);
+randError = countError(secondHalf, randForecast);
+% Get the count of right guesses
+idxRandRight = find( randError(:,1) == 0 );
+rightRandCount = randError(idxRandRight, 2);
+totalRandCount = sum( randError(:,2) );
+% The error using the reconstruction process is
+noMarkovError = 1 - (rightRandCount ./ totalRandCount);
+
+% Display the results
+if showPlots
+    resMarkov = ['Using markov, the error is ', num2str(markovError)];
+    disp(resMarkov);
+    resRandom = ['With a random forecast, the error is ', num2str(noMarkovError)];
+    disp(resRandom);
+end

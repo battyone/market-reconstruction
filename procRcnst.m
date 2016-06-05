@@ -16,10 +16,10 @@ function [ forecast, err ] = procRcnst( markov, sequence )
             % Or use MATLAB's pseudo-random generator, if quota exceeded
             if err == 1
                 randVec = rand(N,1);
-                disp('Using pseudo-random numbers');
+                disp('Using pseudo-random numbers from MATLAB');
             else
                 randVec = ( data - 1 ) ./ resolution;
-                disp('Using true random numbers');
+                disp('Using true random numbers from random.org');
             end
             
             for i=1:N
