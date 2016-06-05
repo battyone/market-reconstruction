@@ -8,7 +8,7 @@ alphabet = 3;
 data_file = 'Data/IBM.csv';
 
 % Open the file
-[T, P, err] = getPricesFromFile(data_file);
+[ T, P, err ] = getPricesFromFile(data_file);
 
 % Get the 1-day returns
 [ r_time , returns , r_err ] = nDayReturns( T , P );
@@ -22,8 +22,8 @@ N = floor( n/2 );
 firstHalf = code(1:N);
 secondHalf = code(N+1:end);
 
-% Get the Markov matrix for the first half
-[ probMtx, m_err ] = markovMatrix(firstHalf);
+% Get the Markov matrix for the first half of coded data
+probMtx = markovMatrix(firstHalf);
 
 % Generate the sequence through a reconstruction process
 [ forecast, f_err ] = procRcnst(probMtx, secondHalf);

@@ -1,6 +1,5 @@
-function [ markov, err ] = markovMatrix( codedData )
-    
-    err = 0;
+function [ markov ] = markovMatrix( codedData )
+% This function calculates the Markov probability matrix for the coded data
     
     % Get the number of data points
     N = length(codedData);

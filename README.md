@@ -1,24 +1,17 @@
 # market-reconstruction
-Data reconstruction process using a Markov process
 
-## Part I
-- Polynomial regression
+## About
 
-- Detrending
+This is the repository for the code I wrote to perform a market reconstruction process through a Markov process.
 
-- Rescaling
+The purpose of such code is to study the structure within financial markets and is part of my master thesis entitled _Modeling Stock Markets through the Reconstruction of Market Processes: The Analysis of the Subprime Crisis_.
 
-- n-day returns
+Supervisor: Tanya Araújo
 
-- Phase space of n-day returns
+Institution: ISEG (Lisbon School of Economics & Management), Universidade de Lisboa
 
-- Historical volatility (n-day periods)
+The code is written in MATLAB and is publicly available for scrutiny, improvement or forks under the relevant license (MIT).
 
-- n-day return correlations
+All functions were written to be as general as possible and [random.org][1]'s API was incorporated to use real random numbers when available. If not possible, then MATLAB's pseudo-number generator is used instead.
 
-## Part II
-- delta(n)
-
-- S_q(n)
-
-- chi(q)
+[1]:https://www.random.org/
