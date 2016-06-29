@@ -21,6 +21,7 @@ function [ markov ] = markovMatrix( codedData )
         seqPrev(prev) = seqPrev(prev) + 1;
     end
     
+    % Convert the frequencies into probabilities
     for i=1:alpha
         markov(i,:) = seqCount(i,:) ./ seqPrev(i);
     end
