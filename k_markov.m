@@ -36,16 +36,28 @@ function [ markov ] = k_markov( codedData, K )
     for i=K:N
         starts = i - (K-1);
         ends = i - 1;
-        k_block = codedData(starts:ends); % Grab the K-block
-        subcell = num2cell(k_block);
+        k_block = fliplr(codedData(starts:ends)); % Grab the K-block
+        prev = num2cell(k_block);
         this = codedData(i);
-        seqCount(subcell{:},this) = seqCount(subcell{:},this) + 1;
-        seqPrev(subcell{:}) = seqPrev(subcell{:}) + 1;
+        % Count the frequencies
+        seqCount(this, prev{:}) = seqCount(this, prev{:}) + 1; % X | [...]
+        seqPrev(prev{:}) = seqPrev(prev{:}) + 1; % | [...]
     end
     
+    combos = permn(index, K-1);
+    
     % Convert the frequencies into probabilities
-    %for i=1:alpha
-    %    markov(i,:) = seqCount(i,:) ./ seqPrev(i);
-    %end
+    for i=1:alpha
+        % P( X | [...] )
+        X = index(i);
+        for j=1:length(combos)
+            prev = num2cell(combos(j,:));
+            freq = seqCount(X, prev{:});
+            total = seqPrev(prev{:});
+            if freq > 0 && total > 0
+                markov(X, prev{:}) = freq ./ total;
+            end
+        end
+    end
 
 end

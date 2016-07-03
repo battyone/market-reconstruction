@@ -17,13 +17,19 @@ function [ markov ] = markovMatrix( codedData )
     for i=2:N
         prev = codedData(i-1);
         this = codedData(i);
-        seqCount(prev,this) = seqCount(prev,this) + 1;
-        seqPrev(prev) = seqPrev(prev) + 1;
+        % Count the frequencies
+        seqCount(this, prev) = seqCount(this, prev) + 1; % X | [...]
+        seqPrev(prev) = seqPrev(prev) + 1; % | [...]
     end
     
     % Convert the frequencies into probabilities
     for i=1:alpha
-        markov(i,:) = seqCount(i,:) ./ seqPrev(i);
+        % P( X | [...] )
+        X = index(i);
+        for j=1:alpha
+            prev = index(j);
+            markov(X, prev) = seqCount(X, prev) ./ seqPrev(prev);
+        end
     end
     
 end

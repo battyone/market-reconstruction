@@ -10,8 +10,8 @@ function [ accMarkov ] = getAccMarkov( markov )
         for i=1:s(1)
             sum = 0;
             for j=1:s(2)
-                sum = sum + markov(i,j);
-                accMarkov(i,j) = sum;
+                sum = sum + markov(j,i);
+                accMarkov(j,i) = sum;
             end
         end
     else

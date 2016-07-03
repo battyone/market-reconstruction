@@ -26,8 +26,8 @@ function [ forecast, err ] = procRcnst( markov, sequence )
                 % Get the true value from the coded sequence
                 trueValue = sequence(i);
                 % Get the accumulated probability for the next value, given
-                % the true value
-                accProb = accMarkov(trueValue,:);
+                % the true value P( X | [...] )
+                accProb = accMarkov(:, trueValue);
                 % Get the respective random value from the vector
                 randVal = randVec(i);
                 % Find the forecasted value
