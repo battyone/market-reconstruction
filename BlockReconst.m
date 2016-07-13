@@ -23,14 +23,17 @@ firstHalf = code(1:N);
 secondHalf = code(N+1:end);
 
 % Get the Markov matrix for the first half of coded data
-probMtx2 = markovMatrix(firstHalf);
+% probMtx2 = markovMatrix(firstHalf);
 
 % Get the Markov matrix for the first half of coded data
 % using the K-block algorithm
 probMtx = k_markov(firstHalf, 2);
 
+acc_k_markov = get_acc_k_markov(probMtx);
+% acc_markov = getAccMarkov(probMtx2);
+
 % Display the results
 if showResult
-    disp(probMtx2);
-    disp(probMtx);
+    % disp(acc_markov);
+    disp(acc_k_markov);
 end
