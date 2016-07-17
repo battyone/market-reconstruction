@@ -7,6 +7,11 @@ function [ markov ] = k_markov( codedData, K )
         % Default size of the K-block
         K = 2;
     end
+    
+    % Prevent non-computable probabilities
+    if K < 2
+        K = 2;
+    end
 
     % Get the number of data points
     N = length(codedData);

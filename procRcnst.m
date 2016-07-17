@@ -1,4 +1,6 @@
 function [ forecast, err ] = procRcnst( markov, sequence )
+    
+    useTrueRand = true;
 
     if nargin == 2
         % Find the size of the input argument markov
@@ -11,10 +13,14 @@ function [ forecast, err ] = procRcnst( markov, sequence )
             % Get the accumulated Markov matrix
             accMarkov = getAccMarkov(markov);
             % Get a vector of true random values from random.org
-            resolution = 10000;
-            [ data, err ] = trueRand(N,1,resolution);
+            if useTrueRand
+                resolution = 10000;
+                [ data, r_err ] = trueRand(N,1,resolution);
+            else
+                r_err = 1;
+            end
             % Or use MATLAB's pseudo-random generator, if quota exceeded
-            if err == 1
+            if r_err == 1
                 randVec = rand(N,1);
                 disp('Using pseudo-random numbers from MATLAB');
             else

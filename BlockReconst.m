@@ -2,13 +2,14 @@
 
 % Settings
 showResult = true;
-alphabet = 3;
+alphabet = 5;
+K = 8;
 
 % Data File
 data_file = 'Data/IBM.csv';
 
 % Open the file
-[ T, P, err ] = getPricesFromFile(data_file);
+[ T, P, ~ ] = getPricesFromFile(data_file);
 
 % Get the 1-day returns
 [ r_time , returns , r_err ] = nDayReturns( T , P );
@@ -22,18 +23,10 @@ N = floor( n/2 );
 firstHalf = code(1:N);
 secondHalf = code(N+1:end);
 
-% Get the Markov matrix for the first half of coded data
-% probMtx2 = markovMatrix(firstHalf);
-
-% Get the Markov matrix for the first half of coded data
-% using the K-block algorithm
-probMtx = k_markov(firstHalf, 2);
-
-acc_k_markov = get_acc_k_markov(probMtx);
-% acc_markov = getAccMarkov(probMtx2);
+% Get the forcast for the second half of coded data
+[ forecast, ~ ] = procBlockRcnst(firstHalf, secondHalf, K);
 
 % Display the results
 if showResult
     % disp(acc_markov);
-    disp(acc_k_markov);
 end

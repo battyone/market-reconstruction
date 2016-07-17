@@ -9,7 +9,7 @@ function [ acc_k_markov ] = get_acc_k_markov( k_markov )
     for i=1:N
         sum = 0;
         for j=1:alphabet
-            idx = 3 * ( i - 1 ) + j;
+            idx = alphabet * ( i - 1 ) + j;
             sum = sum + k_markov(idx);
             acc_k_markov(idx) = sum;
         end
