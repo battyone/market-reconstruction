@@ -4,7 +4,7 @@
 showResult = true; % Display results in the console
 alphabet = 5; % How many intervals to use for the coding alphabet
 K = 8; % How long show the k-markov chain be
-numSim = 2; % How many simulations to run
+numSim = 10; % How many simulations to run
 writeToFile = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
 
