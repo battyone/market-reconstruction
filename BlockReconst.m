@@ -5,7 +5,7 @@ showResult = true; % Display results in the console
 alphabet = 5; % How many intervals to use for the coding alphabet
 K = 8; % How long show the k-markov chain be
 numSim = 2; % How many simulations to run
-writeToFile = true; % Should store the results in a text file
+writeToFile = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
 
 % Start the time counter
@@ -35,11 +35,15 @@ forecastArr = cell(numSim, 1);
 
 for i=1:numSim
     % Get the forecast for the second half of coded data
+    display(['Calculating forescast ',num2str(i),' of ',num2str(numSim)]);
     [ forecastArr{i}, ~ ] = procBlockRcnst(firstHalf, secondHalf, K);
 end
 
 % Stop the counter
 stopTime = datestr(now, formatIn);
+
+% Calculate the errors
+error = calcBlockErrors(forecastArr, secondHalf);
 
 % Write the results to a text file in the specified sub-folder
 if writeToFile
@@ -56,7 +60,7 @@ if writeToFile
     fprintf(fileID, 'Forecasts obtained for the settings above\n\n');
     for i=1:numSim
         fprintf(fileID, 'Run %d\n\n', i);
-        fprintf(fileID, '%d', forecastArr{1});
+        fprintf(fileID, '%d', forecastArr{i});
         fprintf(fileID, '\n\n');
     end
     fclose(fileID);
@@ -64,5 +68,5 @@ end
 
 % Display the results
 if showResult
-    % disp(acc_markov);
+    disp(error);
 end
