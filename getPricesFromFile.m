@@ -1,4 +1,4 @@
-function [Time, Prices, Error] = getPricesFromFile(file_path)
+function [ Time, Prices, err ] = getPricesFromFile(file_path)
 % Extracts the information from data files retrieved from Yahoo! Finance
 
 % Verify path validity
@@ -16,14 +16,14 @@ function [Time, Prices, Error] = getPricesFromFile(file_path)
         Prices = values_matrix{7};
         
         % No error found
-        Error = 0;
+        err = 0;
         
     else
         
         % File reading error
         Time = [];
         Prices = [];
-        Error = 1;
+        err = 1;
 
     end
 

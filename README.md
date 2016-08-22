@@ -1,10 +1,10 @@
-# market-reconstruction
+# Market Reconstruction
 
 ## About
 
 This is the repository for the code I wrote to perform a market reconstruction through a Markov process. Data source is [Yahoo! Finance][1].
 
-The purpose of such code is to study the structure within financial markets and is part of my master thesis entitled _Modeling Stock Markets through the Reconstruction of Market Processes: The Analysis of the Subprime Crisis_.
+The purpose of such code is to study the structure within financial markets and is part of my master's thesis entitled _Modeling Stock Markets through the Reconstruction of Market Processes: The Analysis of the Subprime Crisis_.
 
 Supervisor: Tanya Araújo
 
@@ -16,5 +16,8 @@ The code is written in MATLAB and is publicly available for scrutiny, improvemen
 
 All functions were written to be as general as possible and [random.org][2]'s API was incorporated to use real random numbers when available. If not possible, then MATLAB's pseudo-number generator is used instead.
 
-[1]:http://finance.yahoo.com/
+For detailed information about the functions and scripts, please refer to the [Wiki documentation][3].
+
+[1]:https://finance.yahoo.com/
 [2]:https://www.random.org/
+[3]:https://github.com/joaocarmo/market-reconstruction/wiki

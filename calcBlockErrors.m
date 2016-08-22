@@ -14,10 +14,10 @@ function [ error ] = calcBlockErrors( arrayOfRuns, origin )
         s = size(arrayOfRuns{1});
         Z = s(1);
         % Count the zeros in the vector
-        initZeros = nnz(~arrayOfRuns{1});
-        start = initZeros + 1;
+        %initZeros = nnz(~arrayOfRuns{1});
+        %start = initZeros + 1;
         % Format the origin
-        originData = origin(start:end);
+        %originData = origin(start:end);
         % Initial value and value in case of error
         error = 0;
         
@@ -26,8 +26,8 @@ function [ error ] = calcBlockErrors( arrayOfRuns, origin )
             % Start an accumulator
             errAcc = zeros(N, 1);
             for i=1:N
-                forecast = arrayOfRuns{i}(start:end);
-                errAcc(i) = mean( abs(originData - forecast) );
+                forecast = arrayOfRuns{i};
+                errAcc(i) = mean( abs(origin - forecast) );
             end
             error = mean( errAcc );
         else

@@ -3,14 +3,10 @@
 % Settings
 showResult = true; % Display results in the console
 alphabet = 5; % How many intervals to use for the coding alphabet
-K = 8; % How long show the k-markov chain be
-numSim = 10; % How many simulations to run
-writeToFile = false; % Should store the results in a text file
+K = 2; % How long show the k-markov chain be
+numSim = 2; % How many simulations to run
+logTheResults = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
-
-% Start the time counter
-formatIn = 'dd/mm/yyyy HH:MM:SS';
-startTime = datestr(now, formatIn);
 
 % Data File
 data_file = 'Data/IBM.csv';
@@ -39,31 +35,12 @@ for i=1:numSim
     [ forecastArr{i}, ~ ] = procBlockRcnst(firstHalf, secondHalf, K);
 end
 
-% Stop the counter
-stopTime = datestr(now, formatIn);
-
 % Calculate the errors
 error = calcBlockErrors(forecastArr, secondHalf);
 
 % Write the results to a text file in the specified sub-folder
-if writeToFile
-    formatOut = 'dd-mm-yyyy_HH-MM-SS';
-    timestamp = datestr(now, formatOut);
-    fileName = ['./' writeToFolder '/output_' timestamp '.txt'];
-    disp(['Writing the results to ' fileName]);
-    fileID = fopen(fileName, 'w');
-    fprintf(fileID, 'Program started: \t%s\n', startTime);
-    fprintf(fileID, 'Program stopped: \t%s\n', stopTime);
-    fprintf(fileID, 'Alphabet of size: \t%s\n', num2str(alphabet));
-    fprintf(fileID, 'K-Chain of size: \t%s\n', num2str(K));
-    fprintf(fileID, 'Number of runs: \t%s\n\n', num2str(numSim));
-    fprintf(fileID, 'Forecasts obtained for the settings above\n\n');
-    for i=1:numSim
-        fprintf(fileID, 'Run %d\n\n', i);
-        fprintf(fileID, '%d', forecastArr{i});
-        fprintf(fileID, '\n\n');
-    end
-    fclose(fileID);
+if logTheResults
+    writeToFile(writeToFolder, forecastArr, alphabet, K);
 end
 
 % Display the results
