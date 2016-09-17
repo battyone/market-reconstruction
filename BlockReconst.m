@@ -3,16 +3,20 @@
 % Settings
 showResult = true; % Display results in the console
 alphabet = 5; % How many intervals to use for the coding alphabet
-K = 2; % How long show the k-markov chain be
+K = 8; % How long show the k-markov chain be
 numSim = 2; % How many simulations to run
-logTheResults = false; % Should store the results in a text file
+logTheResults = true; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
 
 % Data File
 data_file = 'Data/IBM.csv';
 
 % Open the file
-[ T, P, ~ ] = getPricesFromFile(data_file);
+[ T0, P0, ~ ] = getPricesFromFile(data_file);
+
+% Detred the data with a given polynomial degree
+poly = 7;
+[ T, P, ~ ] = preProcess(T0, P0, poly);
 
 % Get the 1-day returns
 [ r_time , returns , r_err ] = nDayReturns( T , P );
@@ -36,14 +40,18 @@ for i=1:numSim
 end
 
 % Calculate the errors
-error = calcBlockErrors(forecastArr, secondHalf);
+error1 = calcBlockErrors(forecastArr, secondHalf, 1);
+error2 = calcBlockErrors(forecastArr, secondHalf, 2);
+error3 = calcBlockErrors(forecastArr, secondHalf, 3);
 
 % Write the results to a text file in the specified sub-folder
 if logTheResults
-    writeToFile(writeToFolder, forecastArr, alphabet, K);
+    writeToFile(writeToFolder, forecastArr, firstHalf, secondHalf, alphabet, K);
 end
 
 % Display the results
 if showResult
-    disp(error);
+    disp(error1);
+    disp(error2);
+    disp(error3);
 end

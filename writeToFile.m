@@ -1,10 +1,10 @@
-function [ err ] = writeToFile( writeToFolder, forecastArr, alphabet, K )
+function [ err ] = writeToFile( writeToFolder, forecastArr, probArr, originalArr, alphabet, K )
 % This function writes the cell arrays containing the simulations
 % to a text file located in the defined folder
 
-    if nargin == 2 || nargin == 4
+    if nargin == 4 || nargin == 6
         
-        if nargin == 2
+        if nargin == 4
             alphabet = 'Unspecified';
             K = 'Unspecified';
         end
@@ -32,7 +32,16 @@ function [ err ] = writeToFile( writeToFolder, forecastArr, alphabet, K )
             fprintf(fileID, 'Alphabet size: \t\t%s\n', num2str(alphabet));
             fprintf(fileID, 'K-Chain size: \t\t%s\n', num2str(K));
             fprintf(fileID, 'Number of runs: \t%s\n\n', num2str(N));
-            fprintf(fileID, 'Forecasts obtained for the settings above\n\n');
+
+            % Write the original data used to calculate the probabilities
+            fprintf(fileID, 'Data used for the Markov probabilities\n\n');
+            fprintf(fileID, '%d', probArr);
+            
+            % Write the original data used to forecast
+            fprintf(fileID, '\n\nData used for the forecast\n\n');
+            fprintf(fileID, '%d', originalArr);
+            
+            fprintf(fileID, '\n\nForecasts obtained for the settings above\n\n');
             
             % Write the simulations
             for i=1:N
