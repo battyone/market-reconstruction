@@ -47,8 +47,8 @@ function [ error ] = calcBlockErrors( arrayOfRuns, origin, method )
                 elseif method == 3
                     % Get the absolute of the different between the sets
                     diff = originData - forecast;
-                    % Sum the square of all the differences
-                    error(i, 1) = sum(diff.^2);
+                    % The square root of the sum the square of all the differences
+                    error(i, 1) = sqrt( sum(diff.^2) );
                 end
             end
         else
