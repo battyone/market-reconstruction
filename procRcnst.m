@@ -12,6 +12,8 @@ function [ forecast, err ] = procRcnst( markov, sequence )
             forecast = zeros(N,1);
             % Get the accumulated Markov matrix
             accMarkov = getAccMarkov(markov);
+            display(markov);
+            display(accMarkov);
             % Get a vector of true random values from random.org
             if useTrueRand
                 resolution = 10000;
