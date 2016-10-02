@@ -2,13 +2,13 @@
 showPlots = true;
 
 % Data File
-data_file = 'Data/NYSE.csv';
+data_file = 'Data/IBM.csv';
 
 % Open the file
 [T, P, err] = getPricesFromFile(data_file);
 
 % Get the nth polynomial fit for the data
-n = 7;
+n = 5;
 [p, S, mu] = polyfit(T,P,n);
 poly = polyval(p,T,S,mu);
 
@@ -39,7 +39,7 @@ if err == 0 && showPlots
     xlabel('Time');
     ylabel('Price (USD)');
     title('Historical Prices');
-    legend('Real prices','Polynomial fit (n=7)','Location','southeast');
+    legend('Real prices','Polynomial fit (n=5)','Location','southeast');
     
     % Plot the detrending
     figure;

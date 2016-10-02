@@ -1,3 +1,3 @@
 ### Applications
 
-* [IBM](/joaocarmo/market-reconstruction/tree/master/Applications/IBM)
+* [IBM](https://github.com/joaocarmo/market-reconstruction/tree/master/Applications/IBM)
