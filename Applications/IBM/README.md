@@ -6,6 +6,8 @@
 ### Table of contents
 
 1. [All historical data](#all-historical-data)
+2. [A K=2 reconstruction](#)
+3. [The K>2 reconstruction](#)
 
 ---
 
@@ -50,3 +52,55 @@ Next, we find the 1-day returns on a time offset of **50** days and plot the res
 
 ##### Figure 8 - Returns correlations
 ![Figure 8](images/fig8.png)
+
+The [delta](https://github.com/joaocarmo/market-reconstruction/wiki/delta) function outputs the result in `figure 9` for 1-day, 2-day, ..., 1000-day returns.
+
+##### Figure 9 — Deltas
+![Figure 9](images/fig9.png)
+
+We compute the first 8 q-order moments using the [moments_q](https://github.com/joaocarmo/market-reconstruction/wiki/moments_q) function and these are visible in `figure 10`.
+
+##### Figure 10
+![Figure 10](images/fig10.png)
+
+Finally, we can take the q-order moments that we calculated previously and find the Chi(q) with the [chiOfS](https://github.com/joaocarmo/market-reconstruction/wiki/chiOfS) function and the exponents are plotted in `figure 11`.
+
+##### Figure 11
+![Figure 11](images/fig11.png)
+
+### A K=2 reconstruction
+
+If we consider only _the previous day price_ when building the Markov probability matrix with the [markovMatrix](https://github.com/joaocarmo/market-reconstruction/wiki/markovMatrix) function and we use an alphabet of length **3**, we get the following Markov matrix values for the **first half** of the time period considered:
+
+```
+0.1728    0.1114    0.1667
+0.6256    0.7871    0.6480
+0.2016    0.1015    0.1853
+```
+
+And the accumulated Markov matrix for the same values is thus:
+
+```
+0.1728    0.1114    0.1667
+0.7984    0.8985    0.8147
+1.0000    1.0000    1.0000
+```
+
+The rows represent the day we're considering and the columns the previous day in the following order:
+
+```
+Alphabet coding for today (X) or yesterday (Y)
+1 - Price goes down
+2 - Price stays the same
+3 - Price goes up
+```
+
+Then, we can simply call the probability P( X | Y ) using the matrix index (X,Y). We can clearly see that the probability of staying the same (within one standard deviation from the mean) is the highest.
+
+The [countError](https://github.com/joaocarmo/market-reconstruction/wiki/countError) function outputs the following values when comparing the forecast array with the second half on the historical price data and a randomly generated array in the same way:
+
+```
+Using the Markov probability matrix, the error is 0.3387
+
+With a random forecast, the error is 0.6687
+```

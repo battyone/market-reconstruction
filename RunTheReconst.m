@@ -8,10 +8,10 @@ alphabet = 3;
 data_file = 'Data/IBM.csv';
 
 % Open the file
-[ T0, P0, err ] = getPricesFromFile(data_file);
+[ T0, P0, ~ ] = getPricesFromFile(data_file);
 
 % Detred the data with a given polynomial degree
-poly = 7;
+poly = 5;
 [ T, P, err ] = preProcess(T0, P0, poly);
 
 % Get the 1-day returns

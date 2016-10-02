@@ -2,7 +2,7 @@
 showPlots = true;
 
 % Data File
-data_file = 'Data/NYSE.csv';
+data_file = 'Data/IBM.csv';
 
 % Open the file and pre-process
 [T, P, err] = getPricesFromFile(data_file);
