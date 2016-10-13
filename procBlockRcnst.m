@@ -1,4 +1,4 @@
-function [ forecast, err ] = procBlockRcnst( first_seq, sec_seq, K )
+function [ forecast, randForecast, err ] = procBlockRcnst( first_seq, sec_seq, K, alpha )
 
     useTrueRand = false;
 
@@ -11,14 +11,19 @@ function [ forecast, err ] = procBlockRcnst( first_seq, sec_seq, K )
             % Default size of the K-block
             K = 2;
         end
+        if nargin < 4
+            % Determine the alphabet
+            alpha = length(unique(first_seq));
+        end
         
         % Find the size of the input arguments
         N1 = length(first_seq); % Used to compute the Markov matrix
         N2 = length(sec_seq); % Used for the forecast
         
-        % Pre-allocate the memory for the resulting forecast
+        % Pre-allocate the memory for the resulting forecasts
         fsize = N2 - K + 1;
         forecast = zeros(fsize, 1);
+        randForecast = zeros(fsize, 1);
         
         % Get a vector of true random values from random.org
         if useTrueRand
@@ -30,10 +35,10 @@ function [ forecast, err ] = procBlockRcnst( first_seq, sec_seq, K )
         % Or use MATLAB's pseudo-random generator, if quota exceeded
         if r_err == 1
             randVec = rand(fsize,1);
-            disp('Using pseudo-random numbers from MATLAB');
+            % disp('Using pseudo-random numbers from MATLAB');
         else
             randVec = ( data - 1 ) ./ resolution;
-            disp('Using true random numbers from random.org');
+            % disp('Using true random numbers from random.org');
         end
         
         % Get the first Markov matrix
@@ -59,17 +64,20 @@ function [ forecast, err ] = procBlockRcnst( first_seq, sec_seq, K )
             % Get the respective random value from the vector
             randVal = randVec(starts);
             
-            % Find the forecasted value
+            % Find the forecasted value and the random forecast
             j = 1;
             k = 1;
+            z = 1;
             prob = 0;
+            randProb = 0;
             
             % Find where the random value lands in the accumulated prob
             while randVal > prob
+                % Create the real forecast based on a Markov matrix
                 forecast(i) = j;
                 prob = accProb(j);
                 % Get the K-1 block if prob = 0
-                while prob == 0
+                while prob == 0 && k < K-1
                     k_block = fliplr(sec_seq(starts:ends)); % Grab the K-1 block
                     prev = num2cell(k_block(1:length(k_block)-k));
                     k = k + 1;
@@ -78,6 +86,13 @@ function [ forecast, err ] = procBlockRcnst( first_seq, sec_seq, K )
                     prob = accProb(j);
                 end
                 j = j + 1;
+            end
+            
+            % Generate the random forecast using a uniform distribution
+            while randVal > randProb
+                randForecast(i) = z;
+                randProb = z / alpha;
+                z = z + 1;
             end
         end
         

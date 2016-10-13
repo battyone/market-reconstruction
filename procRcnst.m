@@ -1,8 +1,12 @@
-function [ forecast, err ] = procRcnst( markov, sequence )
+function [ forecast, randForecast, err ] = procRcnst( markov, sequence, alpha )
     
     useTrueRand = true;
 
-    if nargin == 2
+    if nargin == 2 || nargin == 3
+        if nargin == 2
+            % Get the Alphabet
+            alpha = length(unique(sequence));
+        end
         % Find the size of the input argument markov
         s = size(markov);
         if s(1) == s(2)
@@ -10,6 +14,7 @@ function [ forecast, err ] = procRcnst( markov, sequence )
             N = length(sequence);
             % Pre-allocate the memory for the resulting forecast
             forecast = zeros(N,1);
+            randForecast = zeros(N,1);
             % Get the accumulated Markov matrix
             accMarkov = getAccMarkov(markov);
             display(markov);
@@ -40,12 +45,20 @@ function [ forecast, err ] = procRcnst( markov, sequence )
                 randVal = randVec(i);
                 % Find the forecasted value
                 j = 1;
+                z = 1;
                 prob = 0;
+                randProb = 0;
                 % Find where the random value lands in the accumulated prob
                 while randVal > prob
                     forecast(i) = j;
                     prob = accProb(j);
                     j = j + 1;
+                end
+                % Generate a random requence
+                while randVal > randProb
+                    randForecast(i) = z;
+                    randProb = z / alpha;
+                    z = z + 1;
                 end
             end
             

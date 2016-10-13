@@ -6,8 +6,8 @@
 ### Table of contents
 
 1. [All historical data](#all-historical-data)
-2. [A K=2 reconstruction](#)
-3. [The K>2 reconstruction](#)
+2. [A K=2 reconstruction](#a-k2-reconstruction)
+3. [The K>2 reconstruction](#the-k2-reconstruction)
 
 ---
 
@@ -104,3 +104,5 @@ Using the Markov probability matrix, the error is 0.3387
 
 With a random forecast, the error is 0.6687
 ```
+
+### The K>2 reconstruction
