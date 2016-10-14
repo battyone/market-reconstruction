@@ -4,7 +4,7 @@
 showPlots = true; % Display results in plots
 alphabet = 5; % How many intervals to use for the coding alphabet
 K = 8; % How long show the max k-markov chain be
-numSim = 30; % How many simulations to run
+numSim = 10; % How many simulations to run
 logTheResults = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
 
@@ -15,7 +15,7 @@ data_file = 'Data/IBM.csv';
 [ T0, P0, ~ ] = getPricesFromFile(data_file);
 
 % Detred the data with a given polynomial degree
-poly = 7;
+poly = 5;
 [ T, P, ~ ] = preProcess(T0, P0, poly);
 
 % Get the 1-day returns

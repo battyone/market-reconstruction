@@ -29,7 +29,16 @@ min = 1;
 max = 100;
 
 % Check today's quota for this IP
-quota = str2double(webread('http://www.random.org/quota/?format=plain'));
+try
+    quota = str2double(webread('http://www.random.org/quota/?format=plain'));
+catch MExc
+    if (strcmp(MExc.identifier,'MATLAB:webservices:UnknownHost'))
+        quota = -1;
+    else
+        rethrow(MExc);
+    end
+end
+
 if quota < 0
     % No more quota for today
     output = [];

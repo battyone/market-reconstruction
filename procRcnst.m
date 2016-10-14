@@ -28,10 +28,12 @@ function [ forecast, randForecast, err ] = procRcnst( markov, sequence, alpha )
             end
             % Or use MATLAB's pseudo-random generator, if quota exceeded
             if r_err == 1
-                randVec = rand(N,1);
+                randVecA = rand(N,1);
+                randVecB = rand(N,1);
                 disp('Using pseudo-random numbers from MATLAB');
             else
-                randVec = ( data - 1 ) ./ resolution;
+                randVecA = ( data - 1 ) ./ resolution;
+                randVecB = ( data - 1 ) ./ resolution;
                 disp('Using true random numbers from random.org');
             end
             
@@ -42,20 +44,21 @@ function [ forecast, randForecast, err ] = procRcnst( markov, sequence, alpha )
                 % the true value P( X | [...] )
                 accProb = accMarkov(:, trueValue);
                 % Get the respective random value from the vector
-                randVal = randVec(i);
+                randValA = randVecA(i);
+                randValB = randVecB(i);
                 % Find the forecasted value
                 j = 1;
                 z = 1;
                 prob = 0;
                 randProb = 0;
                 % Find where the random value lands in the accumulated prob
-                while randVal > prob
+                while randValA > prob
                     forecast(i) = j;
                     prob = accProb(j);
                     j = j + 1;
                 end
                 % Generate a random requence
-                while randVal > randProb
+                while randValB > randProb
                     randForecast(i) = z;
                     randProb = z / alpha;
                     z = z + 1;
