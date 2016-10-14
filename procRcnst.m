@@ -1,6 +1,6 @@
 function [ forecast, randForecast, err ] = procRcnst( markov, sequence, alpha )
     
-    useTrueRand = true;
+    useTrueRand = false;
 
     if nargin == 2 || nargin == 3
         if nargin == 2
@@ -17,8 +17,8 @@ function [ forecast, randForecast, err ] = procRcnst( markov, sequence, alpha )
             randForecast = zeros(N,1);
             % Get the accumulated Markov matrix
             accMarkov = getAccMarkov(markov);
-            display(markov);
-            display(accMarkov);
+            % display(markov);
+            % display(accMarkov);
             % Get a vector of true random values from random.org
             if useTrueRand
                 resolution = 10000;

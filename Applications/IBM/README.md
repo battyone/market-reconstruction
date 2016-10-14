@@ -97,12 +97,17 @@ Alphabet coding for today (X) or yesterday (Y)
 
 Then, we can simply call the probability P( X | Y ) using the matrix index (X,Y). We can clearly see that the probability of staying the same (within one standard deviation from the mean) is the highest.
 
-The [countError](https://github.com/joaocarmo/market-reconstruction/wiki/countError) function outputs the following values when comparing the forecast array with the second half on the historical price data and a randomly generated array in the same way:
+The [countError](https://github.com/joaocarmo/market-reconstruction/wiki/countError) function outputs the following values when comparing the forecast array with the second half on the historical price data and a randomly generated array in the same way. This was done for a total of 500 simulations.
 
 ```
-Using the Markov probability matrix, the error is 0.3387
+Using Markov, the mean error is 0.33471
 
-With a random forecast, the error is 0.6687
+With a random forecast, the mean error is 0.66663
 ```
+
+And the error of each of the 500 simulations for the Markov generated sequence and the randomly generated sequence is plotted in `figure 12`.
+
+##### Figure 12 — The error of 500 simulations
+![Figure 12](images/fig12.png)
 
 ### The K>2 reconstruction
