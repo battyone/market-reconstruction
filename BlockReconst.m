@@ -2,6 +2,7 @@
 
 % Settings
 showPlots = true; % Display results in plots
+saveErrors = true; % Save the error values in a file
 alphabet = 5; % How many intervals to use for the coding alphabet
 K = 8; % How long show the max k-markov chain be
 numSim = 10; % How many simulations to run
@@ -52,6 +53,9 @@ kAxis = linspace(2,K,K-1);
 % Do the simulations for all Ks
 for j=2:K
 
+    % Display the current calculation
+    disp(['K = ',num2str(j)]);
+    
     % Pre-allocate the memory for the forecasts
     forecastArr = cell(numSim, 1);
     randForecastArr = cell(numSim, 1);
@@ -74,8 +78,6 @@ for j=2:K
     if logTheResults
         writeToFile(writeToFolder, forecastArr, firstHalf, secondHalf, alphabet, K);
     end
-    
-    disp(['K = ',num2str(j)]);
     
     % disp(mean(errorsArr1{j-1}));
     method1(j-1) = mean(errorsArr1{j-1});
@@ -101,16 +103,26 @@ if showPlots
     xlabel('K');
     ylabel('Error: Method 1');
     title('Mean average of the simulations');
+    legend('Markov','Random','Location','best');
 
     figure;
     plot(kAxis,method2,'x',kAxis,methodRand2,'o');
     xlabel('K');
     ylabel('Error: Method 2');
     title('Mean average of the simulations');
+    legend('Markov','Random','Location','best');
     
     figure;
     plot(kAxis,method3,'x',kAxis,methodRand3,'o');
     xlabel('K');
     ylabel('Error: Method 1');
     title('Mean average of the simulations');
+    legend('Markov','Random','Location','best');
+end
+
+% Save the error values in a file
+if saveErrors
+    writeErrorsToFile(writeToFolder, kAxis, method1, methodRand1)
+    writeErrorsToFile(writeToFolder, kAxis, method2, methodRand2)
+    writeErrorsToFile(writeToFolder, kAxis, method3, methodRand3)
 end

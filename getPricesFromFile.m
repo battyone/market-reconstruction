@@ -13,7 +13,7 @@ function [ Time, Prices, err ] = getPricesFromFile(file_path)
         Time = datenum(values_matrix{1});
 
         % Read the adjusted prices vector
-        Prices = values_matrix{7};
+        Prices = values_matrix{6};
         
         % No error found
         err = 0;

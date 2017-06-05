@@ -16,22 +16,22 @@
 We start by considering the whole historical data we have available from [Yahoo! Finance](https://finance.yahoo.com/quote/IBM?p=IBM), ranging from January 2, 1962 to October 2, 2016. In `figure 1`, the raw historical prices are plotted against the time alongside a **5th** degree polynomial fit.
 
 ##### Figure 1 - Raw historical prices
-![Figure 1](images/fig1.png)
+![Figure 1](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig1.png)
 
 Thus, if we subtract the fitted curve from the raw historical prices, we obtain the detrended plot in `figure 2`.
 
 ##### Figure 2 - Detrended prices
-![Figure 2](images/fig2.png)
+![Figure 2](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig2.png)
 
 But the data is still not uniform enough to conduct a decent analysis, so we change the strategy and rescale the data as well in order to obtain the plot in `figure 3`. This is performed by the [preProcess](https://github.com/joaocarmo/market-reconstruction/wiki/preProcess) function.
 
 ##### Figure 3 - Rescaled prices
-![Figure 3](images/fig3.png)
+![Figure 3](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig3.png)
 
 We are now able to use the rescaled data to perform our analysis. In `figure 4` we have plotted the 1-day returns as computed by the [nDayReturns](https://github.com/joaocarmo/market-reconstruction/wiki/nDayReturns) function.
 
 ##### Figure 4 - Historical returns
-![Figure 4](images/fig4.png)
+![Figure 4](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig4.png)
 
 And if we plot the 1-day returns against themselves on a [r(t), r(t+1)] phase space, we observe the `figure 5` centered around the origin.
 
@@ -56,17 +56,17 @@ Next, we find the 1-day returns on a time offset of **50** days and plot the res
 The [delta](https://github.com/joaocarmo/market-reconstruction/wiki/delta) function outputs the result in `figure 9` for 1-day, 2-day, ..., 1000-day returns.
 
 ##### Figure 9 — Deltas
-![Figure 9](images/fig9.png)
+![Figure 9](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig9.png)
 
 We compute the first 8 q-order moments using the [moments_q](https://github.com/joaocarmo/market-reconstruction/wiki/moments_q) function and these are visible in `figure 10`.
 
 ##### Figure 10
-![Figure 10](images/fig10.png)
+![Figure 10](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig10.png)
 
 Finally, we can take the q-order moments that we calculated previously and find the Chi(q) with the [chiOfS](https://github.com/joaocarmo/market-reconstruction/wiki/chiOfS) function and the exponents are plotted in `figure 11`.
 
 ##### Figure 11
-![Figure 11](images/fig11.png)
+![Figure 11](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig11.png)
 
 ### A K=2 reconstruction
 
@@ -90,10 +90,12 @@ The rows represent the day we're considering and the columns the previous day in
 
 ```
 Alphabet coding for today (X) or yesterday (Y)
-1 - Price goes down
+1 - Price goes down (full STD)
 2 - Price stays the same
-3 - Price goes up
+3 - Price goes up (full STD)
 ```
+
+Where STD means one Standard Deviation value from the Mean.
 
 Then, we can simply call the probability P( X | Y ) using the matrix index (X,Y). We can clearly see that the probability of staying the same (within one standard deviation from the mean) is the highest.
 
@@ -108,6 +110,30 @@ With a random forecast, the mean error is 0.66663
 And the error of each of the 500 simulations for the Markov generated sequence and the randomly generated sequence is plotted in `figure 12`.
 
 ##### Figure 12 — The error of 500 simulations
-![Figure 12](images/fig12.png)
+![Figure 12](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig12.png)
 
 ### The K>2 reconstruction
+
+The K>2 reconstruction follows a very similar process as the K=2 with the caveat that we are now considering the previous K days to measure and construct the Markov matrix instead of the previous day alone. That is, we count the occurrences of the alphabet sequence that has length K.
+
+For the following simulations, a `K=8` sequence length was used and an Alphabet of 5 codings:
+
+```
+Alphabet coding for today (X) or K-sequence (Y)
+1 - Price goes down (full STD)
+2 - Price goes down (half STD)
+3 - Price stays the same
+4 - Price goes up (half STD)
+5 - Price goes up (full STD)
+```
+
+For each K, a total of 10 simulations have been run. On the results of these, the errors were computed using [calcBlockErrors](https://github.com/joaocarmo/market-reconstruction/wiki/calcBlockErrors) and compared against a randomly generated set of data using three methods and the results are presented in `figure 13`, `figure 14` and `figure 15`.
+
+##### Figure 13 — The error of K>2 (method 1)
+![Figure 13](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig13.png)
+
+##### Figure 14 — The error of K>2 (method 2)
+![Figure 14](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig14.png)
+
+##### Figure 15 — The error of K>2 (method 3)
+![Figure 15](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig15.png)

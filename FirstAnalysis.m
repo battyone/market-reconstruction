@@ -8,7 +8,7 @@ data_file = 'Data/IBM.csv';
 [T, P, err] = getPricesFromFile(data_file);
 
 % Get the nth polynomial fit for the data
-n = 5;
+n = 3;
 [p, S, mu] = polyfit(T,P,n);
 poly = polyval(p,T,S,mu);
 
@@ -87,7 +87,7 @@ if err == 0 && showPlots
         
         % Accumulated volatility
         figure;
-        plot(flip(vol_time),vol_acc);
+        plot(vol_time,vol_acc);
         datetick('x','keepticks','keeplimits');
         xlabel('Time');
         ylabel('Accumulated volatility');
