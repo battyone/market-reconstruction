@@ -5,7 +5,7 @@ function [ Time , Prices , err ] = preProcess( t , Prc , n )
 
     if nargin == 2
         % Default polynomial degree
-        n = 7;
+        n = 3;
     end
     
     if length(t) == length(Prc)

@@ -39,7 +39,7 @@ if err == 0 && showPlots
     xlabel('Time');
     ylabel('Price (USD)');
     title('Historical Prices');
-    legend('Real prices','Polynomial fit (n=5)','Location','southeast');
+    legend('Real prices','Polynomial fit (n=3)','Location','southeast');
     
     % Plot the detrending
     figure;
