@@ -13,7 +13,7 @@ n = 3;
 poly = polyval(p,T,S,mu);
 
 % Detrending
-dP = P - poly;
+dP = P - poly + mean(P);
 
 % Rescaling
 [ rs_time , rs_price , rs_err ] = preProcess( T , P , n );

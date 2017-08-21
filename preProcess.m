@@ -18,7 +18,7 @@ function [ Time , Prices , err ] = preProcess( t , Prc , n )
         dP = Prc - poly;
         avgP = mean(Prc);
         Time = t;
-        Prices = ( dP ./ poly ) * avgP;
+        Prices = ( dP ./ poly ) * avgP +avgP;
         
         % No error
         err = 0;

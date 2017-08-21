@@ -7,11 +7,15 @@ data_file = 'Data/IBM.csv';
 % Open the file and pre-process
 [T, P, err] = getPricesFromFile(data_file);
 
+% Rescaling
+n = 3;
+[ rs_time , rs_price , rs_err ] = preProcess( T , P , n );
+
 % Get deltas
 N = 10.^3;
 Q = 8;
-[d, n_delta, delta_err] = delta(T, P, N);
-[S, n_S, moments_err] = moments_q(T, P, N, Q);
+[d, n_delta, delta_err] = delta(rs_time, rs_price, N);
+[S, n_S, moments_err] = moments_q(rs_time, rs_price, N, Q);
 [chi, q, chi_err] = chiOfS(S, n_S);
 
 % Plot the data
@@ -28,11 +32,13 @@ if err == 0 && showPlots
     % Plot the moments
     if moments_err == 0
         figure;
-        hold on
+        hold on;
         for j=1:Q
             % Do it in a logarithmic scale
-            plot(log(n_S(:,j)),log(S(:,j)));
+            loglog(n_S(:,j),S(:,j));
         end
+        set(gca,'xscale','log');
+        set(gca,'yscale','log');
         hold off
         xlabel('n');
         ylabel('S_q(n)');
