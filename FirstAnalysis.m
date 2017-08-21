@@ -24,7 +24,10 @@ nday = 1;
 
 % Get the historical volatility
 ndays = 10;
-[ vol_time , vol_hist , vol_acc, vol_err ] = histVol( nday_time , nday_return ,  ndays );
+[ vol_time , vol_hist , vol_err ] = histVol( nday_time , nday_return ,  ndays );
+
+% Get the accumulated volatility
+[ acc_time, acc_vol ] = accVol( nday_time, nday_return);
 
 % Get the correlations
 T_offset = 50;
@@ -87,7 +90,7 @@ if err == 0 && showPlots
         
         % Accumulated volatility
         figure;
-        plot(vol_time,vol_acc);
+        plot(acc_time,acc_vol);
         datetick('x','keepticks','keeplimits');
         xlabel('Time');
         ylabel('Accumulated volatility');
