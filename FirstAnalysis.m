@@ -31,7 +31,7 @@ ndays = 10;
 
 % Get the correlations
 T_offset = 50;
-[corr, n_corr, corr_err] = correlate(T, P, T_offset);
+[corr, n_corr, corr_err] = correlate(rs_time, rs_price, T_offset);
 
 % Plot the historical price
 if err == 0 && showPlots
@@ -100,7 +100,7 @@ if err == 0 && showPlots
     % Plot the correlations
     if corr_err == 0
         figure;
-        plot(n_corr(:,1),corr(:,1),'x',n_corr(:,2),corr(:,2),'o');
+        plot(n_corr(:,1),corr(:,1),'--x',n_corr(:,2),corr(:,2),'--o');
         xlabel('T');
         ylabel('C[r(t),T]');
         title('Returns correlations');

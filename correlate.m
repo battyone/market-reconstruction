@@ -17,8 +17,8 @@ function [ corr, n, err ] = correlate( T, P, T_offset, ndays )
         [~, returns, err] = nDayReturns(T, P, ndays);
         
         for k=1:T_offset
-            corr(k,1) = mean(returns(1+k:end).*returns(1:end-k));
-            corr(k,2) = mean(abs(returns(1+k:end)).*abs(returns(1:end-k)));
+            corr(k,1) = mean(returns(k:end).*returns(1:end-k+1));
+            corr(k,2) = mean(abs(returns(k:end)).*abs(returns(1:end-k+1)));
             n(k,1) = k;
             n(k,2) = k;
         end

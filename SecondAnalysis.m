@@ -23,7 +23,7 @@ if err == 0 && showPlots
     % Plot the n-day returns
     if delta_err == 0
         figure;
-        plot(n_delta,d);
+        loglog(n_delta,d);
         xlabel('n');
         ylabel('delta(n)');
         title('max_t {r(t,n)}');
@@ -43,6 +43,7 @@ if err == 0 && showPlots
         xlabel('n');
         ylabel('S_q(n)');
         title('q-order moments of r(t,n)');
+        legend('q=1','q=2','q=3','q=4','q=5','q=6','q=7','q=8','Location','southeast');
     end
     
     % Plot chi(q)
