@@ -2,9 +2,9 @@
 
 % Settings
 showPlots = true; % Display results in plots
-saveErrors = true; % Save the error values in a file
+saveErrors = false; % Save the error values in a file
 alphabet = 5; % How many intervals to use for the coding alphabet
-K = 8; % How long show the max k-markov chain be
+K = 8; % How long should the max k-markov chain be
 numSim = 10; % How many simulations to run
 logTheResults = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
@@ -16,7 +16,7 @@ data_file = 'Data/IBM.csv';
 [ T0, P0, ~ ] = getPricesFromFile(data_file);
 
 % Detred the data with a given polynomial degree
-poly = 5;
+poly = 3;
 [ T, P, ~ ] = preProcess(T0, P0, poly);
 
 % Get the 1-day returns
@@ -67,11 +67,11 @@ for j=2:K
     end
 
     % Calculate the errors
-    errorsArr1{j-1} = calcBlockErrors(forecastArr, secondHalf, 1);
-    errorsArr2{j-1} = calcBlockErrors(forecastArr, secondHalf, 2);
+    %errorsArr1{j-1} = calcBlockErrors(forecastArr, secondHalf, 1);
+    %errorsArr2{j-1} = calcBlockErrors(forecastArr, secondHalf, 2);
     errorsArr3{j-1} = calcBlockErrors(forecastArr, secondHalf, 3);
-    errorsRandArr1{j-1} = calcBlockErrors(randForecastArr, secondHalf, 1);
-    errorsRandArr2{j-1} = calcBlockErrors(randForecastArr, secondHalf, 2);
+    %errorsRandArr1{j-1} = calcBlockErrors(randForecastArr, secondHalf, 1);
+    %errorsRandArr2{j-1} = calcBlockErrors(randForecastArr, secondHalf, 2);
     errorsRandArr3{j-1} = calcBlockErrors(randForecastArr, secondHalf, 3);
 
     % Write the results to a text file in the specified sub-folder
@@ -80,14 +80,14 @@ for j=2:K
     end
     
     % disp(mean(errorsArr1{j-1}));
-    method1(j-1) = mean(errorsArr1{j-1});
+    %method1(j-1) = mean(errorsArr1{j-1});
     % disp(mean(errorsRandArr1{j-1}));
-    methodRand1(j-1) = mean(errorsRandArr1{j-1});
+    %methodRand1(j-1) = mean(errorsRandArr1{j-1});
     
     % disp(mean(errorsArr2{j-1}));
-    method2(j-1) = mean(errorsArr2{j-1});
+    %method2(j-1) = mean(errorsArr2{j-1});
     % disp(mean(errorsRandArr2{j-1}));
-    methodRand2(j-1) = mean(errorsRandArr2{j-1});
+    %methodRand2(j-1) = mean(errorsRandArr2{j-1});
     
     % disp(mean(errorsArr3{j-1}));
     method3(j-1) = mean(errorsArr3{j-1});
@@ -98,25 +98,25 @@ end
 
 % Display the results
 if showPlots
-    figure;
-    plot(kAxis,method1,'x',kAxis,methodRand1,'o');
-    xlabel('K');
-    ylabel('Error: Method 1');
-    title('Mean average of the simulations');
-    legend('Markov','Random','Location','best');
+    %figure;
+    %plot(kAxis,method1,'x',kAxis,methodRand1,'o');
+    %xlabel('K');
+    %ylabel('Error: Method 1');
+    %title('Average error of the simulations');
+    %legend('Markov','Random','Location','best');
 
-    figure;
-    plot(kAxis,method2,'x',kAxis,methodRand2,'o');
-    xlabel('K');
-    ylabel('Error: Method 2');
-    title('Mean average of the simulations');
-    legend('Markov','Random','Location','best');
+    %figure;
+    %plot(kAxis,method2,'x',kAxis,methodRand2,'o');
+    %xlabel('K');
+    %ylabel('Error: Method 2');
+    %title('Average error of the simulations');
+    %legend('Markov','Random','Location','best');
     
     figure;
     plot(kAxis,method3,'x',kAxis,methodRand3,'o');
     xlabel('K');
-    ylabel('Error: Method 1');
-    title('Mean average of the simulations');
+    ylabel('Error');
+    title('Average error of the simulations');
     legend('Markov','Random','Location','best');
 end
 

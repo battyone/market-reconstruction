@@ -13,7 +13,7 @@
 
 ### All historical data
 
-We start by considering the whole historical data we have available from [Yahoo! Finance](https://finance.yahoo.com/quote/IBM?p=IBM), ranging from January 2, 1962 to October 2, 2016. In `figure 1`, the raw historical prices are plotted against the time alongside a **5th** degree polynomial fit.
+We start by considering the whole historical data we have available from [Yahoo! Finance](https://finance.yahoo.com/quote/IBM?p=IBM). In `figure 1`, the raw historical prices are plotted against the time alongside a **3rd** degree polynomial fit.
 
 ##### Figure 1 - Raw historical prices
 ![Figure 1](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig1.png)
@@ -127,13 +127,7 @@ Alphabet coding for today (X) or K-sequence (Y)
 5 - Price goes up (full STD)
 ```
 
-For each K, a total of 10 simulations have been run. On the results of these, the errors were computed using [calcBlockErrors](https://github.com/joaocarmo/market-reconstruction/wiki/calcBlockErrors) and compared against a randomly generated set of data using three methods and the results are presented in `figure 13`, `figure 14` and `figure 15`.
+For each K, a total of 10 simulations have been run. On the results of these, the errors were computed using [calcBlockErrors](https://github.com/joaocarmo/market-reconstruction/wiki/calcBlockErrors) and compared against a randomly generated set of data using three methods and the results are presented in `figure 13`.
 
-##### Figure 13 — The error of K>2 (method 1)
+##### Figure 13 — The error of K>2 (method 3)
 ![Figure 13](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig13.png)
-
-##### Figure 14 — The error of K>2 (method 2)
-![Figure 14](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig14.png)
-
-##### Figure 15 — The error of K>2 (method 3)
-![Figure 15](https://raw.githubusercontent.com/joaocarmo/market-reconstruction/master/Applications/IBM/images/fig15.png)

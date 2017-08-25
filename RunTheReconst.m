@@ -29,6 +29,7 @@ secondHalf = code(N+1:end);
 
 % Get the Markov matrix for the first half of coded data
 probMtx = markovMatrix(firstHalf);
+disp(probMtx);
 
 % Pre-allocate the memory for the plots
 markovErrors = zeros(numSim, 1);
