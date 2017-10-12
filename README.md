@@ -4,7 +4,7 @@
 
 This is the repository for the code I wrote to perform a market reconstruction through a Markov process. Data source is [Yahoo! Finance][1].
 
-The purpose of such code is to study the structure within financial markets and is part of my master's thesis entitled _Modeling Stock Markets through the Reconstruction of Market Processes: The Analysis of the Subprime Crisis_.
+The purpose of such code is to study the structure within financial markets and is part of my master's thesis entitled _Modeling Stock Markets through the Reconstruction of Market Processes_.
 
 Supervisor: Tanya Araújo
 

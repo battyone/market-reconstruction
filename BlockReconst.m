@@ -10,7 +10,9 @@ logTheResults = false; % Should store the results in a text file
 writeToFolder = 'Results'; % Where to store the results
 
 % Data File
-data_file = 'Data/IBM.csv';
+% data_file = 'Data/IBM.csv';
+% data_file = 'Data/FB.csv';
+data_file = 'Data/GOOG.csv';
 
 % Open the file
 [ T0, P0, ~ ] = getPricesFromFile(data_file);

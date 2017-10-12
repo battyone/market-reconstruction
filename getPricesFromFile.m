@@ -15,6 +15,15 @@ function [ Time, Prices, err ] = getPricesFromFile(file_path)
         % Read the adjusted prices vector
         Prices = values_matrix{6};
         
+        % Check vector file size
+        t_size = size(Time);
+        p_size = size(Prices);
+        if t_size(1) ~= p_size(1)
+            min_size = min(t_size(1), p_size(1));
+            Time = Time(1:min_size);
+            Prices = Prices(1:min_size);
+        end
+        
         % No error found
         err = 0;
         

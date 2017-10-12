@@ -15,10 +15,10 @@ function [ Time , Prices , err ] = preProcess( t , Prc , n )
         poly = polyval(p,t,S,mu);
 
         % Detrending and rescaling
-        dP = Prc - poly;
         avgP = mean(Prc);
+        dP = Prc - poly;
         Time = t;
-        Prices = ( dP ./ poly ) * avgP +avgP;
+        Prices = ( dP ./ poly ) * avgP + avgP;
         
         % No error
         err = 0;
